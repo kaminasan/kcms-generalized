@@ -1,0 +1,179 @@
+/* IMPORT RESET */
+@import url("reset.css");
+
+/* IMPORT 12 COLUMN RESPONSIVE GS */
+@import url("responsive.gs.12col.css");
+
+@import url(https://fonts.googleapis.com/css?family=Jura);
+
+/*	EXAMPLE STYLES */
+body {
+	font-family: sans-serif;
+	color: white;
+   
+}
+
+header {
+	text-align: left;
+        font-family: 'Jura', sans-serif;
+        font-size: 2em;
+        
+       
+	
+}
+
+article {
+	
+	text-align: center;
+	
+}
+
+aside {
+        padding:10px;
+	border-radius: 25px;
+	min-height:300px;
+        line-height: 2em;
+	
+}
+nav{
+   
+    text-align: center;
+
+}
+
+footer {
+	line-height: 2em;
+	text-align: left;
+	font-family: 'Jura', cursive;
+}
+
+#welcome{
+    text-align: right;
+ 
+}
+
+#headerLogo{
+   
+    height:17%;
+}
+#toplinks{
+    font-family: cursive;
+    margin-bottom: .2em;
+   
+}
+
+#footerLogo{
+   width:95%;
+   height:15%;
+   
+}
+
+#titleContainer{
+    text-align: left;
+   
+}
+#leftnav{
+   
+    text-align: center;
+    margin-bottom: 5px;
+    line-height: 3em;
+}
+#navlistside li{
+    text-align: center;
+   
+}
+
+#postName{
+    font-size: 1.5em;
+    text-align: left;
+    
+}
+#aboutMeDiv{
+    overflow: auto;
+    text-align: center;
+}
+#profilepic{
+    height:150px;
+    width: 110px;
+    border: 2px white solid;
+    border-radius: 25px;
+}
+
+#postContent{
+    padding: 1em;
+     border-style: solid;
+     border-color: #7eb7b5;
+    
+}
+
+#loginSection{
+    padding: 30px;
+    line-height: 3em;
+}
+.no_style{
+    list-style: none;
+}
+
+.border_bottom{
+    border-bottom: 2px;
+    border-bottom-color: white;
+    border-style: solid;
+    
+}
+fieldset{
+    border-color: white;
+    border-style: solid;
+}
+.background_pink{
+    background-color: #ed6d88;
+}
+.background_brown{
+    background-color: #e09284;
+}
+
+.background_tan{
+    background-color: #e2c195
+}
+
+.background_teal{
+    background-color: #7eb7b5
+}
+
+.background_ocean{
+  background-color: #1a9ea3;
+}
+
+.hovering{
+    -webkit-box-shadow: 9px 9px 6px 3px rgba(219,191,219,1);
+-moz-box-shadow: 9px 9px 6px 3px rgba(219,191,219,1);
+box-shadow: 9px 9px 6px 3px rgba(219,191,219,1);
+}
+
+.margin_bottom{
+    margin-bottom: .9em;
+}
+.margin_top{
+    margin-top: .5em;
+}
+
+.list_nav{
+    
+    list-style: none;
+    
+}
+
+
+.list_nav li{
+    display: inline;
+    margin-right: 1em;
+    font-size: 1.2em;
+   
+}
+
+.picture_content{
+    width:300px;
+    height: 300px;
+    text-align: left;
+    border: 3px solid teal;
+    border-radius: 30px;
+}

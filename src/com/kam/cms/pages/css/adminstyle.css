@@ -1,0 +1,212 @@
+/* IMPORT RESET */
+@import url("reset.css");
+
+/* IMPORT 12 COLUMN RESPONSIVE GS */
+@import url("adminresponsive.gs.12col.css");
+
+@import url(https://fonts.googleapis.com/css?family=Jura);
+
+/*	EXAMPLE STYLES */
+body {
+	font-family: sans-serif;
+        color: #1e1e29;
+       background-color: rgba(190, 192, 210, 0.9);
+        
+}
+
+header {
+	text-align: left;
+        font-family: 'Jura', sans-serif;
+        font-size: 2em;
+   
+        
+       
+	
+}
+
+article {
+	
+	text-align: center;
+	
+}
+
+aside {
+        padding:10px;
+	border-radius: 25px;
+	min-height:300px;
+        line-height: 1em;
+	
+}
+nav{
+   
+    text-align: center;
+
+}
+
+footer {
+    
+        color: #ccccff;
+	text-align: left;
+	font-family: 'Jura', cursive;
+}
+
+iframe{
+   
+ width:100%;
+ height: 60%;
+    background-color: white;
+}
+
+#postContentTextArea{
+    display: none;
+}
+
+#postContentNoHtml{
+    display:none;
+}
+#welcome{
+    text-align: right;
+    color:white;
+ 
+}
+#titleContainer{
+    background: #284f77;
+        color: white;
+}
+#adminLinks{
+    text-align: center;
+    color: white;
+    min-height: 500px;
+    background: #284f77;
+    border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+}
+
+#adminAccordion h2{
+    border:inset 3px #37458a;
+-moz-border-radius-topleft: 0px;
+-moz-border-radius-topright:0px;
+-moz-border-radius-bottomleft:10px;
+-moz-border-radius-bottomright:8px;
+-webkit-border-top-left-radius:0px;
+-webkit-border-top-right-radius:0px;
+-webkit-border-bottom-left-radius:10px;
+-webkit-border-bottom-right-radius:8px;
+border-top-left-radius:0px;
+border-top-right-radius:0px;
+border-bottom-left-radius:13px;
+border-bottom-right-radius:8px;
+background: #9351bc;
+ padding: 10px;
+ text-align: center;
+}
+
+#toplinks{
+    font-family: cursive;
+    margin-bottom: .2em;
+   font-size: .8em;
+   font-color:white;
+  background: #284f77;
+   border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+#articleContainer{
+    background-color: whitesmoke;
+}
+
+#buttonList{
+    background:-webkit-gradient(radial, 165 0, 0, 220 -257, 465, from(#2D4F77), to(#0B86AC));
+}
+#buttonList input{
+    margin: 10px;
+    padding: 5px;
+}
+#footerLogo{
+   width:95%;
+   height:150px;
+   
+}
+#footer_contact{
+    padding-top: 4%;
+}
+
+#titleContainer{
+    text-align: left;
+   
+}
+
+
+#addPostContainer{
+    background-color: #7f65a9;
+    padding: 2%;
+}
+#addPostContainer label{
+    text-decoration: underline;
+}
+
+#postName{
+    font-size: 1.5em;
+    text-align: left;
+    
+}
+
+
+#postContent{
+    padding: 2em;
+    
+}
+
+#loginSection{
+    padding: 30px;
+    line-height: 3em;
+}
+.no_style{
+    list-style: none;
+}
+
+.border_bottom{
+    border-bottom: 2px;
+    border-bottom-color: white;
+    border-style: solid;
+    
+}
+fieldset{
+    border-color: white;
+    border-style: solid;
+}
+
+
+.hovering{
+    -webkit-box-shadow: 9px 9px 6px 3px rgba(219,191,219,1);
+-moz-box-shadow: 9px 9px 6px 3px rgba(219,191,219,1);
+box-shadow: 9px 9px 6px 3px rgba(219,191,219,1);
+}
+
+.margin_bottom{
+    margin-bottom: .9em;
+}
+.margin_top{
+    margin-top: .5em;
+}
+
+.list_nav{
+    
+    list-style: none;
+    
+}
+
+
+.list_nav li{
+    display: inline;
+    margin-right: 1em;
+    font-size: 1.2em;
+   
+}
+
+.picture_content{
+    width:300px;
+    height: 300px;
+    text-align: left;
+    border: 3px solid teal;
+    border-radius: 30px;
+}
