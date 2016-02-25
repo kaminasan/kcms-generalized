@@ -53,6 +53,7 @@ public class Login extends HttpServlet {
         String userPass = request.getParameter("userPass");
         String userName = request.getParameter("userName");
         System.out.println("Now attempting to call getSpecificUser with username: " + userName + "and password: " + userPass);
+        //Leaving out salt and hash related files on github for security purposes
         boolean userExists = dao.userInDatabase(userName, userPass);
         System.out.println("UserExists: " +userExists);
         
