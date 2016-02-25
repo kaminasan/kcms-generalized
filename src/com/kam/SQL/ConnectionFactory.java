@@ -17,8 +17,8 @@ public class ConnectionFactory extends AbstractConnectionFactory {
     private static final ConnectionFactory instance = new ConnectionFactory();
     private static int numberOfConnectionsCalled = 0;
     public static final String URL = "jdbc:mysql://yourserver:yourport/databasename";
-    public static final String USER = "username";
-    public static final String PASSWORD = "password";
+    public static final String USER = "yourusername";
+    public static final String PASSWORD = "yourpassword";
     public static final String DRIVER_CLASS = "com.mysql.jdbc.Driver";
 
     @Override
