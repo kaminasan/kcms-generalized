@@ -50,8 +50,8 @@ public class Login extends HttpServlet {
     throws ServletException, IOException {
         RequestDispatcher view = request.getRequestDispatcher("/userlogin");
         UserDAO dao = new UserDAO();
-        String userPass = request.getParameter("userPass");
-        String userName = request.getParameter("userName");
+        String userPass = request.getParameter("YOURDESIREDLOGINPARAM");
+        String userName = request.getParameter("YOURDESIREDPARAM");
         System.out.println("Now attempting to call getSpecificUser with username: " + userName + "and password: " + userPass);
         //Leaving out salt and hash related files on github for security purposes
         boolean userExists = dao.userInDatabase(userName, userPass);
