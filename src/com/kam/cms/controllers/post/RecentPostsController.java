@@ -43,7 +43,7 @@ public class RecentPostsController extends HttpServlet {
               
          }
          else{
-         System.out.println("THIS IS NOT WORKING!");
+         System.out.println("THIS IS NOT WORKING! FOR SOME REASON");
         
         request.setAttribute("postList", postList);
         view.forward(request, response);    
