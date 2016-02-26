@@ -18,7 +18,7 @@ import java.util.List;
 public class ImageLister {
     final static String BASEPATH = "D:\\BakeTradeUploads\\Images\\Posts\\";
     
-    public static  String[] getImageNames(String postPath){ //insert the post Id
+    public static  String[] getImageNames(String postPath){ //insert the post Id and mainImage or extraImage
         
         String[] namelist = null;
         File imageDir = new File(BASEPATH+postPath);
@@ -34,13 +34,15 @@ public class ImageLister {
   
     
      public static void setImagesForPostList(List<PostBean> postList){
-        String[] imageList;
+        String[] mainImageList = null;
+        String[] extraImageList = null;
         
         for(PostBean post : postList){
-            imageList = ImageLister.getImageNames(post.getPostId().toString()+"\\mainTitleImage");
-            if(imageList != null){
-                post.setPostImages(imageList);
-            }
+            mainImageList = ImageLister.getImageNames(post.getPostId().toString()+"\\mainTitleImage");
+            extraImageList = ImageLister.getImageNames(post.getPostId().toString()+"\\ExtraImages");
+            post.setMainImage(mainImageList);
+            post.setExtraImages(extraImageList);
+           
         }
     }
 }

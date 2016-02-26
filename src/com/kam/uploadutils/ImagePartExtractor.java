@@ -125,7 +125,7 @@ public class ImagePartExtractor implements PartExtractor{
       public boolean saveAllPostImages(Part titleImage, List<Part> extraImages, String postId ){
             boolean allSaved = false;
             String titleImageSaveLoc = saveTitleImageToDisk(titleImage, postId);
-            String extraImagesSaveLoc = postId + File.separator + "ExtraImages" ; //postId\\ExtraImages
+            String extraImagesSaveLoc = postId + File.separator + "ExtraImages" ; //postId\\extraImages
             System.out.println("Title Image Saved at: " + titleImageSaveLoc);
            
         for (Part extraImage : extraImages) {

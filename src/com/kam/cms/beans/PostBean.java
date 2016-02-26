@@ -21,9 +21,8 @@ public class PostBean implements Serializable{
     private String postSummary;
     private Integer posterId;
     private String posterName;
-
-
-    private String[] postImages;
+    private String[] extraImages;
+    private String[] mainImage;
     private List<CategoryBean> categoryList;
 
   
@@ -118,13 +117,7 @@ public class PostBean implements Serializable{
         this.posterName = posterName;
     }
 
-      public String[] getPostImages() {
-        return postImages;
-    }
-
-    public void setPostImages(String[] postImages) {
-        this.postImages = postImages;
-    }
+  
     @Override
     public String toString() {
         return "PostBean{" + "postId=" + postId + ", postTitle=" + postTitle + ", posterId=" + posterId + ", posterName=" + posterName + '}';
@@ -136,6 +129,22 @@ public class PostBean implements Serializable{
 
     public void setCategoryList(List<CategoryBean> categoryList) {
         this.categoryList = categoryList;
+    }
+
+    public String[] getExtraImages() {
+        return extraImages;
+    }
+
+    public void setExtraImages(String[] extraImages) {
+        this.extraImages = extraImages;
+    }
+
+    public String[] getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(String[] mainImage) {
+        this.mainImage = mainImage;
     }
     
 }

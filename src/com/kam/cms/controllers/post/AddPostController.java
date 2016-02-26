@@ -115,11 +115,12 @@ public class AddPostController extends HttpServlet {
                 boolean saved =  partEx.saveAllPostImages(titleImage, extraImagesList, postId.toString()); //we saved all the images correctly
                if(saved){ //we saved everything, let's redirect the user to the new post.
                
-               newPost.setPostImages(ImageLister.getImageNames(postId.toString()));
+               newPost.setMainImage(ImageLister.getImageNames(postId.toString()+"\\mainTitleImage"));
+               newPost.setExtraImages(ImageLister.getImageNames(postId.toString()+"\\ExtraImages"));
                 newPost.setPosterName(poster.getUserName());
                 request.setAttribute("post", newPost);
                 
-                view=request.getRequestDispatcher("/post/"+postId.toString()+"/");
+                view=request.getRequestDispatcher("/post/"+postId.toString());
                 view.forward(request, response);
                       }
                else{ //our saving failed somewhere, let's delete all things that were put in

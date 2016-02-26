@@ -37,7 +37,10 @@ public class PostController extends HttpServlet {
         ServletContext sc = request.getServletContext();
         PostDAO dao = new PostDAO();
         PostBean post = null;
-        String postId = request.getParameter("post");
+        String[] query = request.getRequestURI().substring(0).split("/");
+        String postId = query[1];
+        
+        
        
         RequestDispatcher view = sc.getRequestDispatcher("/WEB-INF/post.jsp");
         if(!ParamValidator.isValidPostId(postId) ){    //If we have an empty param
@@ -49,7 +52,8 @@ public class PostController extends HttpServlet {
             post = dao.getSpecificPost(postId);
             if(post != null){                  //if the database is NOT empty, this will contain a value.
                  
-                post.setPostImages(ImageLister.getImageNames(postId+"\\mainTitleImage"));        //get the images for it.
+                post.setMainImage(ImageLister.getImageNames(postId+"\\mainTitleImage"));        //get the main images for it.
+                post.setExtraImages(ImageLister.getImageNames(postId+"\\ExtraImages"));
                 post.setCategoryList(dao.getSpecificPostCategoriesList(postId));
                 request.setAttribute("post", post);
           
