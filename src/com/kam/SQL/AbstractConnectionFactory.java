@@ -9,7 +9,7 @@ import java.sql.Connection;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 abstract class AbstractConnectionFactory {
      

@@ -7,7 +7,7 @@ package com.kam.cms.filecontrol;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public class DirectoryCreatorFactory {
    public static final String POSTDIR_CREATOR= "post";

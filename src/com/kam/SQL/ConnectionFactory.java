@@ -10,7 +10,7 @@ import java.sql.Connection;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public class ConnectionFactory extends AbstractConnectionFactory {
 

@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public class ImageLister {
     final static String BASEPATH = "D:\\BakeTradeUploads\\Images\\Posts\\";

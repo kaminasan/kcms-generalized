@@ -1,7 +1,7 @@
 <%-- 
     Document   : postsubmit
     Created on : Nov 15, 2015, 6:21:22 PM
-    Author     : Blacksteath
+    Author     : KaminaSan <www.kaminasan.com>
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

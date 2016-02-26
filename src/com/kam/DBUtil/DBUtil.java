@@ -18,7 +18,7 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public class DBUtil {
      private static  DataSource dataSource;

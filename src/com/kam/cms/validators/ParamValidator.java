@@ -7,7 +7,7 @@ package com.kam.cms.validators;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public  class ParamValidator {
     

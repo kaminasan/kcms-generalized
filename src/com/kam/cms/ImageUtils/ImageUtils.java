@@ -18,7 +18,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public class ImageUtils {
     

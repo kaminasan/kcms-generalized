@@ -1,7 +1,7 @@
 <%-- 
     Document   : error
     Created on : Oct 9, 2015, 8:40:04 PM
-    Author     : Blacksteath
+    Author     : KaminaSan <www.kaminasan.com>
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

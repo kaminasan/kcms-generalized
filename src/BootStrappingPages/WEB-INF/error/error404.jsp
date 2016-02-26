@@ -1,7 +1,7 @@
 <%-- 
     Document   : error404
     Created on : Oct 8, 2015, 12:06:00 AM
-    Author     : Blacksteath
+    Author     : KaminaSan <www.kaminasan.com>
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

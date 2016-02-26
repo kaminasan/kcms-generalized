@@ -10,7 +10,7 @@ import java.io.File;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public class DirectoryDeleter {
     public static boolean deleteFolder(File folderToDelete){

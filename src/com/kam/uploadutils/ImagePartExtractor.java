@@ -22,7 +22,7 @@ import javax.servlet.http.Part;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public class ImagePartExtractor implements PartExtractor{
    

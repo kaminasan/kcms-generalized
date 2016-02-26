@@ -7,7 +7,7 @@ package com.kam.cms.filecontrol;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public interface DirectoryCreator {
     public String BASEPATH = "D:\\BakeTradeUploads\\"; //This give us the basepath of D:/BakeTradeUploads/

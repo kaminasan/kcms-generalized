@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public class SQLTester {
        

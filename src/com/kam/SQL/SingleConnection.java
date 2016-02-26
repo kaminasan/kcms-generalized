@@ -11,7 +11,7 @@ import java.sql.SQLException;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public class SingleConnection {
     private Connection myConnection = null;

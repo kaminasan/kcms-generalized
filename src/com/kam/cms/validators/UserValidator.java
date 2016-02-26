@@ -9,7 +9,7 @@ import com.kam.cms.beans.UserBean;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public class UserValidator {
     public static boolean validatedPoster(UserBean userBean){

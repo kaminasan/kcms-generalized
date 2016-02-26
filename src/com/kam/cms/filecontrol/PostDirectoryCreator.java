@@ -9,7 +9,7 @@ import java.io.File;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public class PostDirectoryCreator implements DirectoryCreator {
      final static public String POSTDIRECTORY = "Images\\Posts\\";

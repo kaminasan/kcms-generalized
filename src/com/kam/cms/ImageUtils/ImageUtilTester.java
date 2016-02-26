@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public class ImageUtilTester {
     public static void main(String[] args) {

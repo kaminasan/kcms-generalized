@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public class UserBean implements Serializable {
     private Integer userId;

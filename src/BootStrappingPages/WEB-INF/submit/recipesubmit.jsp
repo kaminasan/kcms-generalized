@@ -1,7 +1,7 @@
 <%-- 
     Document   : recipesubmit
     Created on : Nov 23, 2015, 1:50:14 AM
-    Author     : Blacksteath
+    Author     : KaminaSan <www.kaminasan.com>
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>

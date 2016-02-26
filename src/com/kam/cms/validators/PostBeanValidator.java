@@ -9,7 +9,7 @@ import com.kam.cms.beans.PostBean;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 public class PostBeanValidator {
     

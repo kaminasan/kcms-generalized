@@ -26,7 +26,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 
 /**
