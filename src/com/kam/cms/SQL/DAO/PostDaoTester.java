@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.kam.SQL.DAO;
+package com.kam.cms.SQL.DAO;
 
 import java.util.List;
 

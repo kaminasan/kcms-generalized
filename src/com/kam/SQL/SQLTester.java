@@ -5,7 +5,7 @@
  */
 package com.kam.SQL;
 
-import com.kam.SQL.DAO.PostDAO;
+import com.kam.cms.SQL.DAO.PostDAO;
 import com.kam.cms.beans.PostBean;
 import java.util.List;
 

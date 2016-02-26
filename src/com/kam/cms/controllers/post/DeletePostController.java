@@ -5,7 +5,7 @@
  */
 package com.kam.cms.controllers.post;
 
-import com.kam.SQL.DAO.PostDAO;
+import com.kam.cms.SQL.DAO.PostDAO;
 import com.kam.cms.beans.PostBean;
 import com.kam.cms.beans.UserBean;
 import com.kam.cms.filecontrol.DirectoryCreator;
