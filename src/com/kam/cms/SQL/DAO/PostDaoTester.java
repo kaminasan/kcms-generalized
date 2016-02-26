@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  *
- * @author KaminaSan <www.kaminasan.com>
+ * @author KaminaSan < www.kaminasan.com>
  */
 public class PostDaoTester {
 
