@@ -9,15 +9,23 @@ package com.kam.cms.controllers.post;
 import com.kam.cms.SQL.DAO.PostDAO;
 import com.kam.cms.beans.PostBean;
 import com.kam.cms.beans.UserBean;
+import com.kam.cms.filecontrol.DirectoryCreator;
+import com.kam.cms.filecontrol.DirectoryDeleter;
 import com.kam.cms.filecontrol.ImageLister;
+import com.kam.cms.filecontrol.PostDirectoryCreator;
 import com.kam.cms.validators.PostBeanValidator;
+import com.kam.cms.validators.UserValidator;
 import com.kam.uploadutils.ImagePartExtractor;
 import com.kam.uploadutils.PartExtractor;
+import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +36,7 @@ import javax.servlet.http.Part;
  * @author Blacksteath
  */
 @MultipartConfig
+@WebServlet(name = "AddPostController", urlPatterns = {"/post/add"})
 public class AddPostController extends HttpServlet {
    
    
@@ -47,9 +56,7 @@ public class AddPostController extends HttpServlet {
             
         }
         else{
-            System.out.println("We are sending the user to /");
-            view = request.getRequestDispatcher("/");
-            view.forward(request, response);
+            //display the Submit FORM
         }
         
     } 
@@ -58,24 +65,28 @@ public class AddPostController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        
         ServletContext ctx = request.getServletContext();
-        RequestDispatcher view = null;
-         
+        RequestDispatcher view = null; 
+        PostDAO postDao = null;
+       Part titleImage =null;
+       List<Part> extraImagesList = null;
+       Collection<Part> partCollection = null;
         UserBean poster = (UserBean) request.getSession().getAttribute("user");
-         if(poster == null){                                                           //We have a null user so we need one before we can Post, redirect to Login
+        boolean validUser = UserValidator.validatedPoster(poster);
+         if(!validUser){                                                           //We have a null user so we need one before we can Post, redirect to Login
              System.out.println("Error at addpost, no user. Redirecting to login");
              view= request.getRequestDispatcher("/login");
              request.setAttribute("errorMessage", "Please Login before Posting!");
              view.forward(request, response);
-             System.out.println("We sent the response");
+             return;
              
         }
          else{
-         System.out.println("we made it past the redirect");
+      
          Integer posterId = poster.getUserId();    //getPosterID from the request session
          PostBean newPost = new PostBean(request.getParameter("postTitle"), request.getParameter("postContent"), request.getParameter("postContentNoHtml"), request.getParameter("postSummary"),  posterId);
         boolean validPost = (PostBeanValidator.validatePost(newPost) && (request.getPart("titleImage").getSize() > 0));
-
         
         if(!validPost){
             request.setAttribute("errorMessage", "ERROR: You are missing a post parameter! Please fill out all parts of the post!");
@@ -85,26 +96,39 @@ public class AddPostController extends HttpServlet {
         }
         else{
             
-            PostDAO postDao = new PostDAO();
-            Integer postId = postDao.insertPost(newPost);
+            postDao = new PostDAO();
+            Integer postId = postDao.insertPost(newPost); //insert the post
             System.out.println("The post ID is coming back to the Add Post Controller as:" + postId);
             newPost.setPostId(postId);
-            if(postId < 0 || postId == null){
+            if(postId < 0){ //we could not insert the post, send an error back
      
                 request.setAttribute("errorMessage", "ERROR:POST ADD FAILED");
                 view = request.getRequestDispatcher("/WEB-INF/error/error.jsp");
                 view.forward(request, response);
+             
             }
-            else{
-                Part titleImage = request.getPart("titleImage");
-                PartExtractor partEx = new ImagePartExtractor();
-                partEx.saveTitleImageToDisk(titleImage, postId.toString());
-                newPost.setPostImages(ImageLister.getImageNames(postId.toString()));
-               newPost.setPosterName(poster.getUserName());
+            else{ //we inserted the post, let's do Image Processing
+                ImagePartExtractor partEx = new ImagePartExtractor();
+                titleImage = request.getPart("titleImage");
+                partCollection = request.getParts();
+                extraImagesList = partEx.getPartsByParamName(partCollection, "ExtraImages[]"); //get the correct parts by searching by name
+                boolean saved =  partEx.saveAllPostImages(titleImage, extraImagesList, postId.toString()); //we saved all the images correctly
+               if(saved){ //we saved everything, let's redirect the user to the new post.
+               
+               newPost.setPostImages(ImageLister.getImageNames(postId.toString()));
+                newPost.setPosterName(poster.getUserName());
                 request.setAttribute("post", newPost);
                 
-                view=request.getRequestDispatcher("/post?post="+postId.toString());
+                view=request.getRequestDispatcher("/post/"+postId.toString()+"/");
                 view.forward(request, response);
+                      }
+               else{ //our saving failed somewhere, let's delete all things that were put in
+                   boolean deletedFromDatabase = postDao.deletePost(postId.toString());
+                   if(deletedFromDatabase){
+                       DirectoryDeleter.deleteFolder(new File(DirectoryCreator.BASEPATH + PostDirectoryCreator.POSTDIRECTORY + postId.toString()));
+                   }
+               }
+                
             }
             
             

@@ -366,9 +366,7 @@ public class PostDAO {
         if(canDelete){    //check to make sure the post exists.
             int succeeded = ps.executeUpdate(); //run the delete code
             if(succeeded >= 1) deleted = true;
-            System.out.println("deleted post from Database: " + postID);
-              System.out.println("Now deleting:" + DirectoryCreator.BASEPATH + PostDirectoryCreator.POSTDIRECTORY + postId +" Directory");
-                    DirectoryDeleter.deleteFolder(new File(DirectoryCreator.BASEPATH + PostDirectoryCreator.POSTDIRECTORY + postId));
+           
         }
        
         }

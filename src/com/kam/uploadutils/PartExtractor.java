@@ -5,6 +5,8 @@
  */
 package com.kam.uploadutils;
 
+import java.util.Collection;
+import java.util.List;
 import javax.servlet.http.Part;
 
 /**
@@ -12,5 +14,6 @@ import javax.servlet.http.Part;
  * @author Blacksteath
  */
 public interface PartExtractor {
-    public String saveTitleImageToDisk(Part partToSave, String path);
+    public String savePartToDisk(Part partToSave, String postIdWithDirectoryToSave, boolean overWrite);
+    public  List<Part> getPartsByParamName(Collection<Part> partCollection, String parameterName);
 }
