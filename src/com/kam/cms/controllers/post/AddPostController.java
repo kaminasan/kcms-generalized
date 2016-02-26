@@ -33,7 +33,7 @@ import javax.servlet.http.Part;
 
 /**
  *
- * @author Blacksteath
+ * @author KaminaSan <www.kaminasan.com>
  */
 @MultipartConfig
 @WebServlet(name = "AddPostController", urlPatterns = {"/post/add"})
