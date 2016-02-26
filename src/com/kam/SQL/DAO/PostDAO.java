@@ -9,7 +9,6 @@ import com.kam.DBUtil.DBUtil;
 import com.kam.SQL.ConnectionFactory;
 import com.kam.cms.beans.CategoryBean;
 import com.kam.cms.beans.PostBean;
-import com.kam.cms.beans.RecipeStepBean;
 import com.kam.cms.filecontrol.DirectoryCreator;
 import com.kam.cms.filecontrol.DirectoryDeleter;
 import com.kam.cms.filecontrol.PostDirectoryCreator;
@@ -386,126 +385,7 @@ public class PostDAO {
         return deleted;
     }
     
-    public List<RecipeStepBean> getRecipeStepBeanList(String postID){
-        if(!ParamValidator.isValidPostId(postID)) return null;
-        List<RecipeStepBean> stepList = null;
-        Integer postId = Integer.parseInt(postID);
-        Connection con = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        final String SQLSTRING = "SELECT stepId, parentId, stepNumber, stepSummary FROM recipe_steps " +
-                                 "WHERE parentId = ? "+
-                                 "ORDER BY stepNumber ASC";
-        try{
-            con = getConnection();
-            ps = con.prepareStatement(SQLSTRING);
-            ps.setInt(1, postId);
-            RecipeStepBean stepBean;
-            rs = ps.executeQuery();
-            stepList = new ArrayList<>();
-            while(rs.next()){
-                stepBean = new RecipeStepBean(rs.getInt("stepId"), rs.getInt("parentId"), rs.getInt("stepNumber"), rs.getString("stepSummary"));
-                stepList.add(stepBean);
-            }
-            return stepList;
-        }
-        catch(SQLException ex){
-          ex.printStackTrace();
-        }
-        finally{
-            DBUtil.closeStatement(ps);
-            DBUtil.closeConnection(con);
-            DBUtil.closeRS(rs);
-           
-        }
-        return stepList;
-    }
-     
-      
-      public boolean insertRecipeSteps(String[] recipeSteps, String postID ){
-          boolean success = false;
-          if(!ParamValidator.isValidPostId(postID)) return success;
-          if(recipeSteps == null) return success;
-          Integer parentId = Integer.parseInt(postID);
-          Connection con = null;
-          PreparedStatement stmt = null;
-          final String  INSERTSTRING = "INSERT into recipe_steps(parentId, stepNumber, stepSummary) "
-                                        + "VALUES(?, ?, ?)";
-          
-          try{
-              con = getConnection();
-              stmt = con.prepareStatement(INSERTSTRING);
-              
-              for(int i = 0; i < recipeSteps.length; i++){
-                  stmt.setInt(1, parentId);
-                  stmt.setInt(2, i+1 );
-                  stmt.setString(3, recipeSteps[i]);
-                  stmt.addBatch();        //add each row
-              }
-              
-              stmt.executeBatch();              //submit batch all at once.
-              success = true;
-          }
-          
-          catch(SQLException ex){
-              success = false;
-          }
-          
-          finally{
-              DBUtil.closeConnection(con);
-              DBUtil.closeStatement(stmt);
-          }
-         
-          return success;
-      }
-      
-        public boolean updateRecipeSteps(String[] recipeSteps, String postID)
-  {
-    boolean updated = false;
-    if ((!ParamValidator.isValidPostId(postID)) || (recipeSteps == null)) {
-      return updated;
-    }
-    Integer postId = Integer.parseInt(postID);
-    Connection con = null;
-    PreparedStatement delStatement = null;
-    PreparedStatement insertStatement = null;
-    String deleteQuery = "DELETE FROM baketrade.recipe_steps WHERE parentId = ?";
-    
-    String insertQuery = "Insert INTO recipe_steps(parentId, stepNumber, stepSummary) "
-                            + "VALUES(?, ? ,?)";
-    try
-    {
-      con = getConnection();    // use the same connection for both updates/queries
-      con.setAutoCommit(false);
-      delStatement = con.prepareStatement(deleteQuery);
-      delStatement.setInt(1, postId);
-      delStatement.execute();      //do the  delete first, and queue the execute
-      
-      insertStatement = con.prepareStatement(insertQuery);  //prepare the insert and use a batch on it
-      for (int i = 0; i < recipeSteps.length; i++)
-      {
-        insertStatement.setInt(1, postId.intValue());
-        insertStatement.setInt(2, i + 1);
-        insertStatement.setString(3, recipeSteps[i]);
-        insertStatement.addBatch();
-      }
-      insertStatement.executeBatch(); // queue the batch
-      con.commit();        //send both statements/queries
-      updated = true;
-    }
-    catch (SQLException ex)
-    {
-      System.out.println("Error on Delete or Insert of RecipeStep, rolling back.");
-      DBUtil.rollback(con);
-    }
-    finally
-    {
-      DBUtil.closeStatement(delStatement);
-      DBUtil.closeStatement(insertStatement);
-      DBUtil.closeConnection(con);
-    }
-    return updated;
-  }
+  
       public boolean insertPostCategories(String postID, String[] catsToInsert){
           boolean inserted = false;
           if(!ParamValidator.isValidPostId(postID)) return inserted;
@@ -537,32 +417,7 @@ public class PostDAO {
           
       }
       
-      public int getPostCount(){
-          int postCount = 0;
-          Connection con = null;
-          Statement stmt = null;
-          ResultSet rs = null;
-          
-          String countSQL = "SELECT COUNT(*) AS numOfPosts FROM posts";
-          try{
-              con = getConnection();
-               stmt = con.createStatement();
-              rs = stmt.executeQuery(countSQL);
-              if(rs.next()){
-                  postCount = rs.getInt("numOfPosts");
-              }
-              
-          }
-          catch(SQLException ex){
-              System.out.println("Could not execute getPostCount");
-          }
-          finally{
-              DBUtil.closeStatement(stmt);
-              DBUtil.closeRS(rs);
-              DBUtil.closeConnection(con);
-          }
-          return postCount;
-      }
+
       
       public List<CategoryBean> getCategoryList(){
           List<CategoryBean> categoryList = new ArrayList<>();
@@ -670,7 +525,33 @@ public class PostDAO {
           }
           return postIds;
       }
-      
+            public int getPostCount(){
+          int postCount = 0;
+          Connection con = null;
+          Statement stmt = null;
+          ResultSet rs = null;
+          
+          String countSQL = "SELECT COUNT(*) AS numOfPosts FROM posts";
+          try{
+              con = getConnection();
+               stmt = con.createStatement();
+              rs = stmt.executeQuery(countSQL);
+              if(rs.next()){
+                  postCount = rs.getInt("numOfPosts");
+              }
+              
+          }
+          catch(SQLException ex){
+              System.out.println("Could not execute getPostCount");
+          }
+          finally{
+              DBUtil.closeStatement(stmt);
+              DBUtil.closeRS(rs);
+              DBUtil.closeConnection(con);
+          }
+          return postCount;
+      }
+            
       private Connection getConnection()
   {
     Connection con = ConnectionFactory.returnConnection("pooled");

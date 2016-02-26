@@ -35,7 +35,7 @@ public class PostController extends HttpServlet {
     throws ServletException, IOException {
         ServletContext sc = request.getServletContext();
         PostDAO dao = new PostDAO();
-        PostBean attachPost = null;
+        PostBean post = null;
         String postId = request.getParameter("post");
        
         RequestDispatcher view = sc.getRequestDispatcher("/WEB-INF/post.jsp");
@@ -45,15 +45,12 @@ public class PostController extends HttpServlet {
                view.forward(request, response);
     }
         else{                                      //we have a param, let's check the database
-            attachPost = dao.getSpecificPost(postId);
-            if(attachPost != null){                  //if the database is NOT empty, this will contain a value.
-                 RecipeBean myRecipe = new RecipeBean(attachPost);
-                myRecipe.setPostImages(ImageLister.getImageNames(postId+"\\mainTitleImage"));        //get the images for it.
-                myRecipe.setCategoryList(dao.getSpecificPostCategoriesList(postId));
-                myRecipe.setRecipeSteps(dao.getRecipeStepBeanList(postId));
-                String[] ingredients = myRecipe.getPostContent().split("\n");
-                myRecipe.setRecipeIngredients(ingredients);
-                request.setAttribute("post", myRecipe);
+            post = dao.getSpecificPost(postId);
+            if(post != null){                  //if the database is NOT empty, this will contain a value.
+                 
+                post.setPostImages(ImageLister.getImageNames(postId+"\\mainTitleImage"));        //get the images for it.
+                post.setCategoryList(dao.getSpecificPostCategoriesList(postId));
+                request.setAttribute("post", post);
           
             view.forward(request, response);
             }
