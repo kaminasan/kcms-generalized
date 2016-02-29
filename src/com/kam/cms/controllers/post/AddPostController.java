@@ -91,7 +91,7 @@ public class AddPostController extends HttpServlet {
         if(!validPost){
             request.setAttribute("errorMessage", "ERROR: You are missing a post parameter! Please fill out all parts of the post!");
             System.out.println("not a valid post!!!");
-            view = ctx.getRequestDispatcher("/recent");
+            view = ctx.getRequestDispatcher("/post/recent");
             view.forward(request, response);
         }
         else{

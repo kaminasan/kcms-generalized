@@ -34,7 +34,7 @@ public class RecentPostsController extends HttpServlet {
          List<PostBean> postList = null;
          String page = request.getPathInfo();
           System.out.println("Requested Path: " + page);
-         RequestDispatcher view = request.getRequestDispatcher("/recentposts");
+         RequestDispatcher view = request.getRequestDispatcher("/post/recent");
          PostDAO  dao = new PostDAO();
          if(page == null){
              postList = dao.getRecentPostBeanList(0,5);
