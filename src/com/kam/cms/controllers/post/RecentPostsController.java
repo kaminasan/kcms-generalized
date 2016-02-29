@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author KaminaSan <www.kaminasan.com>
  */
+@WebServlet(name="RecentPostsController", urlPatterns = {"/post/recent"})
 public class RecentPostsController extends HttpServlet {
    
    
@@ -34,7 +36,7 @@ public class RecentPostsController extends HttpServlet {
          List<PostBean> postList = null;
          String page = request.getPathInfo();
           System.out.println("Requested Path: " + page);
-         RequestDispatcher view = request.getRequestDispatcher("/post/recent");
+         RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/recent-posts.jsp");
          PostDAO  dao = new PostDAO();
          if(page == null){
              postList = dao.getRecentPostBeanList(0,5);
