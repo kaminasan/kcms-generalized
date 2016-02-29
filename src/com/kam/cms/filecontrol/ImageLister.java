@@ -7,8 +7,6 @@ package com.kam.cms.filecontrol;
 
 import com.kam.cms.beans.PostBean;
 import java.io.File;
-import java.util.Arrays;
-
 import java.util.List;
 
 /**

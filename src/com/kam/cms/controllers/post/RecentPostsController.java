@@ -32,29 +32,22 @@ public class RecentPostsController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-         int postsPerPage = 5;
+      
          List<PostBean> postList = null;
-         String page = request.getPathInfo();
-          System.out.println("Requested Path: " + page);
+         
          RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/recent-posts.jsp");
          PostDAO  dao = new PostDAO();
-         if(page == null){
+        
              postList = dao.getRecentPostBeanList(0,5);
-               ImageLister.setImagesForPostList(postList);
-               view.forward(request, response);
-              
-         }
-         else{
-         System.out.println("THIS IS NOT WORKING! FOR SOME REASON");
-        
-        request.setAttribute("postList", postList);
+           request.setAttribute("postList", postList);
         view.forward(request, response);    
-         }
+        
+    }
         
          
          
         
-    } 
+    
 
  
     @Override
