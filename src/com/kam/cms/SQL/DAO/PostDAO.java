@@ -411,7 +411,46 @@ public class PostDAO {
           
       }
       
-
+public boolean updatePostCategories(String postID, String[] catsToInsert){
+          boolean inserted = false;
+          if(!ParamValidator.isValidPostId(postID)) return inserted;
+          Integer postId = Integer.parseInt(postID);
+          Connection con = null;
+          PreparedStatement stmt = null;
+          PreparedStatement deleteStmt = null;
+          String deleteCategoriesSQL = "DELETE FROM post_categories "
+                                         + "WHERE postId = ?";
+          String insertCategoriesSQL = "INSERT INTO post_categories(postId, categoryId) "
+                                        + "VALUES(?, ?)";
+         try{
+             con = getConnection();
+             con.setAutoCommit(false);
+              deleteStmt = con.prepareStatement(deleteCategoriesSQL);
+             stmt = con.prepareStatement(insertCategoriesSQL);
+             deleteStmt.setInt(1, postId);
+             deleteStmt.executeUpdate();
+             for(String categoryId : catsToInsert){
+                 stmt.setInt(1, postId);
+                 stmt.setInt(2, Integer.parseInt(categoryId));
+                 stmt.addBatch();
+             }
+             stmt.executeBatch();
+             con.commit();
+             inserted = true;
+         }
+         catch(SQLException ex){
+             ex.printStackTrace();
+             System.out.println("Could not update post Cats. Error, now attempting rollback");
+            DBUtil.rollback(con);
+         }
+         finally{
+             DBUtil.closeStatement(stmt);
+             DBUtil.closeConnection(con);
+             
+         }
+         return inserted;
+          
+      }
       
       public List<CategoryBean> getCategoryList(){
           List<CategoryBean> categoryList = new ArrayList<>();
