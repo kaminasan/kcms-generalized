@@ -20,10 +20,13 @@ LoginApp.controller('loginController', ['$scope', '$http',
                 console.log("We succeeded!");
             console.log(response);
             console.log("Response data is: " + response.data);
+            location.reload();
         
         },
                     function (response){
-                console.log("we FAILED"); });
+                console.log("we FAILED"); 
+                console.log("Response Data is: " + response.data);
+                    });
             
         };
         
