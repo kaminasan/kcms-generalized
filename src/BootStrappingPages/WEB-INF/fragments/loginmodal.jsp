@@ -21,7 +21,7 @@
                 <br>
                 <button class="btn btn-primary " type="submit">Submit</button>
             </div>
-                    {{loginData}}
+                   
                 </form>
         </div>
             <div class="modal-footer">

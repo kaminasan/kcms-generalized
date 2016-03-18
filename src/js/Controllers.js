@@ -40,8 +40,10 @@ LoginApp.controller('LogoutController', ['$scope', '$http', function($scope, $ht
           method: 'GET',
           url: 'logout'   
       }).then(function(response){
+          
           console.log("Logged Out Successfully");
           console.log(response.data);
+          location.reload();
       }, function(response){
           console.log("Failed to Logout");
           console.log(response.data);
