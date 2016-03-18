@@ -17,7 +17,7 @@
                         <li><a href="<c:url value="/contact"></c:url>"><span class="glyphicon glyphicon-envelope"></span> Contact</a></li>
                         <%--Insert Your Various Links Here --%>
                             <li><c:choose>
-                                <c:when test="${not empty user}"><a href="<c:url value="/logout"></c:url>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></c:when>
+                                    <c:when test="${not empty user}"><a ng-app="LoginApp" ng-controller="LogoutController" ng-click="processLogout()" ><span class="glyphicon glyphicon-log-out"></span> Logout</a></c:when>
                                 <c:otherwise><a href="<c:url value="/login"></c:url>"> <span class="glyphicon glyphicon-log-in"></span> Login</a></c:otherwise>
                                 </c:choose></li>
                     </ul>

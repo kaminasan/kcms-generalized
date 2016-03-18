@@ -39,7 +39,6 @@ public class Logout extends HttpServlet {
             response.setStatus(200);
             writer.print("Logged Out!");
             
-            
         }
         else{
             response.setStatus(401);

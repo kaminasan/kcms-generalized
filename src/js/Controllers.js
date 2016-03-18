@@ -32,3 +32,21 @@ LoginApp.controller('loginController', ['$scope', '$http',
         
 }]);
 
+
+LoginApp.controller('LogoutController', ['$scope', '$http', function($scope, $http){
+  
+  $scope.processLogout = function(){
+      $http({
+          method: 'GET',
+          url: 'logout'   
+      }).then(function(response){
+          console.log("Logged Out Successfully");
+          console.log(response.data);
+      }, function(response){
+          console.log("Failed to Logout");
+          console.log(response.data);
+      });
+  };
+        
+}]);
+
