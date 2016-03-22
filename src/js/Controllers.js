@@ -9,7 +9,7 @@ LoginApp.controller('loginController', ['$scope', '$http',
     function($scope, $http){
         
         $scope.loginData = {};
-        
+        $scope.loginMessage = "" ;
         $scope.processLogin = function(){
             $http({
                 method: 'POST',
@@ -20,12 +20,14 @@ LoginApp.controller('loginController', ['$scope', '$http',
                 console.log("We succeeded!");
             console.log(response);
             console.log("Response data is: " + response.data);
+            $scope.loginMessage = "Logged in successfully!";
             location.reload();
         
         },
                     function (response){
                 console.log("we FAILED"); 
                 console.log("Response Data is: " + response.data);
+                $scope.loginMessage = "Error: Username or Password incorrect, please try again.";
                     });
             
         };
@@ -40,7 +42,7 @@ LoginApp.controller('LogoutController', ['$scope', '$http', function($scope, $ht
           method: 'GET',
           url: 'logout'   
       }).then(function(response){
-          
+          alert("Logged Out!");
           console.log("Logged Out Successfully");
           console.log(response.data);
           location.reload();
