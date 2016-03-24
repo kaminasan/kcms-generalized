@@ -22,8 +22,8 @@ import javax.servlet.RequestDispatcher;
  *
  * @author KaminaSan <www.kaminasan.com>
  */
-@WebServlet(name="LoginController", urlPatterns={"/login"})
-public class LoginController extends HttpServlet {
+@WebServlet(name="ModalLoginController", urlPatterns={"/modal-login"})
+public class ModalLoginController extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
@@ -64,10 +64,8 @@ public class LoginController extends HttpServlet {
         }
         else{
            dao = new UserDAO();
-           //production phase uncomment ** user = dao.getSpecificUser(userName, userPass);
-           if(userName.equalsIgnoreCase("test") && userPass.equalsIgnoreCase("test")){
-               user = new UserBean(1, "kaminasan", "Kameron", "Monte", "kaminazan@gmail.cm", userPass, 69);
-           }
+          user = dao.getSpecificUser(userName, userPass);
+          
            if(user == null){
                writer.print("Error! User Name or Password Incorrect.");
                return;
