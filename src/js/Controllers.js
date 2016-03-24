@@ -13,7 +13,7 @@ LoginApp.controller('loginController', ['$scope', '$http',
         $scope.processLogin = function(){
             $http({
                 method: 'POST',
-                url: 'login',
+                url: 'modal-login',
                 data: $.param($scope.loginData), //this is to serialize the object as params param1=blah&param2=blahblah
                 headers: {'Content-Type' : 'application/x-www-form-urlencoded'}
             }).then(function (response){
