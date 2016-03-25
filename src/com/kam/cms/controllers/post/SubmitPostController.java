@@ -30,10 +30,12 @@ public class SubmitPostController extends HttpServlet {
     throws ServletException, IOException {
         ServletContext ctx = request.getServletContext();
         RequestDispatcher view = null;
+        String backPage = request.getParameter("backPage"); //We will add this dynamically from the addpost  link
         UserBean user= (UserBean)request.getSession().getAttribute("user");
         boolean validPoster = ((user != null) && user.getUserLevel() >= 2 );
         if(!validPoster){
-            view = ctx.getRequestDispatcher("/userlogin");
+            view = ctx.getRequestDispatcher("/login");
+            request.setAttribute("backPage", backPage);
             request.setAttribute("errorMessage", "You do not have permission to post. Please Login or Register");
             view.forward(request, response);
         }
