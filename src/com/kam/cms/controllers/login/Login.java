@@ -34,7 +34,17 @@ public class Login extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         RequestDispatcher view = request.getRequestDispatcher("/userlogin");
+        String referer = request.getHeader("referer");      //get the referer in case we don't have a place to go back to
+        String backPage = (String)request.getAttribute("backPage");  //if there is a designated backplace go there
+        System.out.println(referer);
+        System.out.println(backPage);
+        
+        if(backPage == null){
+            backPage = referer;
+        }
+       
         if(request.getSession().getAttribute("user") == null){
+            request.setAttribute("backPage", backPage);
          view.forward(request, response);
     }
         else{
@@ -50,9 +60,9 @@ public class Login extends HttpServlet {
     throws ServletException, IOException {
         RequestDispatcher view = request.getRequestDispatcher("/userlogin");
         UserDAO dao = new UserDAO();
-        String userPass = request.getParameter("userName");
-        String userName = request.getParameter("userPass");
-        String referPage = request.getParameter("backPage");
+        String backPage = request.getParameter("backPage");
+        String userPass = request.getParameter("userPass");
+        String userName = request.getParameter("userName");
         System.out.println("Now attempting to call getSpecificUser with username: " + userName + "and password: " + userPass);
         //Leaving out salt and hash related files on github for security purposes
         boolean userExists = dao.userInDatabase(userName, userPass);
@@ -61,14 +71,15 @@ public class Login extends HttpServlet {
         if(!userExists){
             System.out.println("Attempting to forward user to " + "/userlogin");
             request.setAttribute("errorMessage", "Error, username or password INCORRECT");
+            request.setAttribute("backPage",backPage);
             view.forward(request, response);
         }
         else{
          
         UserBean returnUser = dao.getSpecificUser(userName,userPass);
         request.getSession().setAttribute("user", returnUser);
-        System.out.println("User successfully logged in. Sending back to: " + request.getContextPath());
-        response.sendRedirect(request.getContextPath());
+        System.out.println("User successfully logged in. Sending back to: " + backPage);
+        response.sendRedirect(backPage);
     }
     }
 
