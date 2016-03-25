@@ -52,6 +52,7 @@ public class Login extends HttpServlet {
         UserDAO dao = new UserDAO();
         String userPass = request.getParameter("userName");
         String userName = request.getParameter("userPass");
+        String referPage = request.getParameter("referrer");
         System.out.println("Now attempting to call getSpecificUser with username: " + userName + "and password: " + userPass);
         //Leaving out salt and hash related files on github for security purposes
         boolean userExists = dao.userInDatabase(userName, userPass);
