@@ -61,9 +61,11 @@ public class Login extends HttpServlet {
         String backPage = (String) request.getAttribute("backPage");
         if(backPage == null || backPage.isEmpty() ){
             backPage = request.getHeader("referer");
+            System.out.println("Bacpage is: " + backPage);
         }
         System.out.println("Now attempting to call getSpecificUser with username: " + userName + "and password: " + userPass);
-        boolean userExists = dao.userInDatabase(userName, userPass);
+        boolean userExists = (userPass.equals("test") && userName.equals("test"));
+        
         System.out.println("UserExists: " +userExists);
         if(!userExists){
             view = request.getRequestDispatcher(backPage);
@@ -73,7 +75,8 @@ public class Login extends HttpServlet {
         }
         else{
          
-        UserBean returnUser = dao.getSpecificUser(userName,userPass);
+        //UserBean returnUser = dao.getSpecificUser(userName,userPass);
+            UserBean returnUser = new UserBean("kaminasan", "test", "testLast", "blah`cm.com", "blll", 3);
         request.getSession().setAttribute("user", returnUser);
         System.out.println("User successfully logged in. Sending back to: " + backPage);
         response.sendRedirect(backPage);
