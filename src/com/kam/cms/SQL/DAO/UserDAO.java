@@ -98,10 +98,46 @@ public class UserDAO {
     }
     
 
-        public String insertUser(UserBean newUser) {
-            String tempString = null;
-        return tempString;
+   public UserBean addUser(UserBean userToAdd){
+    Integer userId = null;
+    String userName = userToAdd.getUserName();
+     String firstName = userToAdd.getFirstName();
+   String lastName   = userToAdd.getLastName();
+    String userEmail = userToAdd.getUserEmail();
+   String userPass   = userToAdd.getUserPass();
+    Integer userLevel = userToAdd.getUserLevel();
+     PreparedStatement stmt = null;
+     Connection con = null;
+     ResultSet rs = null;
+     UserBean newlyAddedUser = null;
+    String addUserSQL = "INSERT INTO users(userName, firstName, lastName, userEmail, userPass, userLevel)" 
+                        + " VALUES(?,?,?,?,?, ?)";
+    
+    try{
+        con = this.getConnection();
+        stmt = con.prepareStatement(addUserSQL, Statement.RETURN_GENERATED_KEYS);
+        stmt.setString(1, userName);
+        stmt.setString(2, firstName);
+        stmt.setString(3, lastName);
+        stmt.setString(4, userEmail);
+        stmt.setString(5, userPass);
+        stmt.setInt(6, userLevel);
+        
+        stmt.executeUpdate();
+        rs = stmt.getGeneratedKeys();
+        userId = rs.getInt(1);
+        newlyAddedUser = new UserBean(userId, userName, firstName, lastName, userEmail, userPass, userLevel);
     }
+    catch(SQLException ex){
+        ex.printStackTrace();
+    }
+    
+    finally{
+       DBUtil.closeStatement(stmt);
+       DBUtil.closeConnection(con);
+    }
+    return newlyAddedUser;
+   }
 
         public String updateStudent(UserBean updatedStudent) {
              String tempString = null;
