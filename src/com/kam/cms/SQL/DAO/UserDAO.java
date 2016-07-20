@@ -179,7 +179,7 @@ public class UserDAO {
         PreparedStatement ps = null;
         boolean userInDatabase = false;
         
-        Connection con = ConnectionFactory.returnConnection("single");
+        Connection con = getConnection();
         String getUserStatement = "SELECT userName FROM users "
                                 + "WHERE userName = ?";
 
