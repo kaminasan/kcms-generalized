@@ -11,16 +11,19 @@ package com.kam.cms.controllers.admin;
  * and open the template in the editor.
  */
 
+import com.kam.cms.beans.UserBean;
 import java.io.IOException;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class AddUserController extends HttpServlet {
+@WebServlet(name="RegistrationControler", urlPatterns={"/register"})
+public class RegisterUserController extends HttpServlet {
    
    
 
@@ -28,7 +31,17 @@ public class AddUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-    
+    UserBean user = (UserBean)request.getSession().getAttribute("user");
+    ServletContext ctx = request.getServletContext();
+    RequestDispatcher view = ctx.getRequestDispatcher("/");
+    if(!(user == null)){
+        view.forward(request, response);
+    }
+    else{
+       view = ctx.getRequestDispatcher("/WEB-INF/register.jsp");  
+    }
+   
+   
      
     } 
 

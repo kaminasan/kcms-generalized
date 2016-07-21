@@ -61,7 +61,7 @@ public class Login extends HttpServlet {
         String backPage = (String) request.getAttribute("backPage");
         if(backPage == null || backPage.isEmpty() ){
             backPage = request.getHeader("referer");
-            System.out.println("Bacpage is: " + backPage);
+            System.out.println("Backpage is: " + backPage);
         }
         System.out.println("Now attempting to call getSpecificUser with username: " + userName + "and password: " + userPass);
         boolean userExists = (userPass.equals("test") && userName.equals("test"));
