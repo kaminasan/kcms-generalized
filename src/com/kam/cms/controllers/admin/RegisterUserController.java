@@ -34,11 +34,12 @@ public class RegisterUserController extends HttpServlet {
     UserBean user = (UserBean)request.getSession().getAttribute("user");
     ServletContext ctx = request.getServletContext();
     RequestDispatcher view = ctx.getRequestDispatcher("/");
-    if(!(user == null)){
+    if(user != null){                    //If user is not null he is already registered, send him back home
         view.forward(request, response);
     }
-    else{
-       view = ctx.getRequestDispatcher("/WEB-INF/register.jsp");  
+    else{ 
+       view = ctx.getRequestDispatcher("/WEB-INF/register.jsp");  //if user is null, send him to 
+       view.forward(request, response);
     }
    
    
@@ -49,6 +50,15 @@ public class RegisterUserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        ServletContext ctx = request.getServletContext();
+        RequestDispatcher view = ctx.getRequestDispatcher("/WEB-INF/register.jsp");
+        UserBean newUser = null;
+        String firstName = request.getParameter("userFirstName");
+        String lastName = request.getParameter("userLastName");
+        String userName = request.getParameter("userName");
+        String emailAddress = request.getParameter("userEmail");
+        String userPass = request.getParameter("userPass");
+        String userPassConfirm = request.getParameter("userPassConfirm");
         
     }
 
