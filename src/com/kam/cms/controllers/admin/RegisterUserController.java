@@ -11,6 +11,8 @@ package com.kam.cms.controllers.admin;
  * and open the template in the editor.
  */
 
+import com.kam.DBUtil.DBUtil;
+import com.kam.cms.SQL.DAO.UserDAO;
 import com.kam.cms.beans.UserBean;
 import java.io.IOException;
 import java.util.Date;
@@ -50,6 +52,7 @@ public class RegisterUserController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        UserDAO userDAO = new UserDAO();
         ServletContext ctx = request.getServletContext();
         RequestDispatcher view = ctx.getRequestDispatcher("/WEB-INF/register.jsp");
         UserBean newUser = null;
@@ -59,6 +62,10 @@ public class RegisterUserController extends HttpServlet {
         String emailAddress = request.getParameter("userEmail");
         String userPass = request.getParameter("userPass");
         String userPassConfirm = request.getParameter("userPassConfirm");
+        if(userDAO.userInDatabase(userName)){
+            request.setAttribute("errorMessage","Error, this user name is taken");
+            view.forward(request, response);
+        }
         
     }
 
@@ -71,4 +78,6 @@ public class RegisterUserController extends HttpServlet {
         return "Short description";
     }
 
+  
+    
 }
