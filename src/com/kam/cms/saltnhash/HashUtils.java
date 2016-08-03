@@ -9,16 +9,10 @@ package com.kam.cms.saltnhash;
  *
  * @author KaminaSan <www.kaminasan.com>
  */
-public class SaltGenerator {
-    private static SaltGenerator generator = null;
+public class HashUtils {
+    private final static HashGenerator hashGen = HashGenerator.getInstance();
     
-    
-   public static SaltGenerator getGenerator(){
-        if(generator == null){
-            generator = new SaltGenerator();
-        }
-        return generator;
+    public static String getHashedPass(String plainTextPass){
+        return hashGen.getHash(plainTextPass);
     }
-   
-   
 }

@@ -9,8 +9,12 @@ package com.kam.cms.saltnhash;
  *
  * @author KaminaSan <www.kaminasan.com>
  */
-public class HashUtil {
-    public static HashGenerator hashGenerator = null;
-    public static SaltGenerator saltGenerator = null;
-    
+public class HashGeneratorTester {
+    public static void main(String[] args) {
+       HashGenerator hashGen1 = HashGenerator.getInstance();
+       HashGenerator hashGen2 = HashGenerator.getInstance();
+       System.out.println("Tester Finished");
+        
+        
+    }
 }

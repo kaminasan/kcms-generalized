@@ -111,7 +111,7 @@ public class UserDAO {
      ResultSet rs = null;
      UserBean newlyAddedUser = null;
     String addUserSQL = "INSERT INTO users(userName, firstName, lastName, userEmail, userPass, userLevel)" 
-                        + " VALUES(?,?,?,?,?, ?)";
+                        + " VALUES(?,?,?,?,?,?)";
     
     try{
         con = this.getConnection();

@@ -9,28 +9,37 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author KaminaSan <www.kaminasan.com>
  */
-public class HashGenerator {
+ class HashGenerator {
     
    private static HashGenerator generatorInstance = new HashGenerator();
-  private static final int LOADLEVEL = 12;
-   
-   private  String getHash(String stringToHash){
+   private static final int LOADLEVEL = 12;
+   private HashGenerator(){ //This has to be private so new cannot be called
+       
+   }
+   public String getHash(String stringToHash){
        
        String hashedString = BCrypt.hashpw(stringToHash, BCrypt.gensalt(LOADLEVEL));
        
        return hashedString; 
     }
    
-   private String testMatch(String hashedPass, String plainTextPass){
+   public String testMatch(String hashedPass, String plainTextPass){
        boolean matched= BCrypt.checkpw(plainTextPass, hashedPass);
        String result = (matched) ? "Password Matched": "No match";
        return result;   
    }
    
-   public static HashGenerator getInstance(){
+   public static HashGenerator getInstance(){ 
        if(generatorInstance == null ) {
+           System.out.println("No singleton hash generator, creating new one");
            generatorInstance = new HashGenerator();
        }
-       return generatorInstance;
-   }
+       else{
+           System.out.println("Already have a hash generator");
+       }
+       
+   
+       return HashGenerator.generatorInstance;
+}
+   
 }
