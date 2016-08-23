@@ -139,10 +139,7 @@ public class UserDAO {
     return newlyAddedUser;
    }
 
-        public String updateStudent(UserBean updatedStudent) {
-             String tempString = null;
-        return tempString;
-    }
+  
 
     
         public boolean userInDatabase(String user, String password) {
