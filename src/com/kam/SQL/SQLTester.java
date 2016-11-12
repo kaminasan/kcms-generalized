@@ -17,10 +17,7 @@ public class SQLTester {
        
        public static void main(String[] args) {
         SQLTester tester = new SQLTester();
-       for(int i = 0; i < 3000 ; i++){
-           tester.testgetAllPosts();
-           System.out.println("NEW CALL NEW CALLLLLLLLLLLLLLLLL" + "CURRENTLY ON CALL: "+  (i+1) );
-       }
+        tester.testgetAllPosts();
     }
     public boolean testgetSpecificPost(String postNumString){
        boolean worked = false;

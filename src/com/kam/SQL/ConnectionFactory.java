@@ -16,6 +16,7 @@ public class ConnectionFactory extends AbstractConnectionFactory {
 
     private static final ConnectionFactory instance = new ConnectionFactory();
     private static int numberOfConnectionsCalled = 0;
+    // The FOLLOWING is only used for the single connections, not for JNDI lookup!!!
     public static final String URL = "jdbc:mysql://yourserver:yourport/databasename";
     public static final String USER = "yourusername";
     public static final String PASSWORD = "yourpassword";

@@ -14,8 +14,8 @@ public class HashGeneratorTester {
        HashGenerator hashGen1 = HashGenerator.getInstance();
        HashGenerator hashGen2 = HashGenerator.getInstance();
        System.out.println("Hash Gen 1 and 2 are the same object:" + hashGen1.equals(hashGen2));
-       String firstPassword =  "passpass123";
-       String secondPassword = "passpass123";
+       String firstPassword =  "xxx";
+       String secondPassword = "xxx";
       
        String firstHash = hashGen1.getHash(firstPassword);
        String secondHash = hashGen2.getHash(secondPassword);
