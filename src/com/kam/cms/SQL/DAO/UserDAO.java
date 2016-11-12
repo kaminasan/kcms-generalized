@@ -9,7 +9,8 @@ import com.kam.DBUtil.DBUtil;
 import com.kam.SQL.ConnectionFactory;
 
 import com.kam.cms.beans.UserBean;
-import com.kam.cms.saltnhash.HashUtils;
+import com.kam.cms.saltnhash.HashGeneratorTester;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -209,7 +210,7 @@ public class UserDAO {
     }
     
     private String getHashedPass(String unHashedPass){
-        String hashedPass = HashUtils.getHashedPass(unHashedPass);
-        return hashedPass;
+        
+      return null;
     }
 }

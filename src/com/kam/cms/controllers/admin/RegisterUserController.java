@@ -14,7 +14,6 @@ package com.kam.cms.controllers.admin;
 import com.kam.DBUtil.DBUtil;
 import com.kam.cms.SQL.DAO.UserDAO;
 import com.kam.cms.beans.UserBean;
-import com.kam.cms.saltnhash.HashUtils;
 import java.io.IOException;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
@@ -74,8 +73,8 @@ public class RegisterUserController extends HttpServlet {
             request.setAttribute("errorMessage", "Error, passwords do not match");
         }
         else{
-             String hashedPass = HashUtils.getHashedPass(userPass); //we need the hashed pass to save in the DB
-           newUserBean = new UserBean(userName, firstName, lastName, emailAddress, hashedPass, 1);
+           
+           newUserBean = new UserBean(userName, firstName, lastName, emailAddress, userPass, 1);
            newUserBean = userDAO.addUser(newUserBean); //add the user through the DAO
             request.getSession(true).setAttribute("user", newUserBean); // set the user in the session
            view = ctx.getRequestDispatcher("/");
