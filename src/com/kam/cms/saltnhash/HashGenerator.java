@@ -35,9 +35,7 @@ import org.mindrot.jbcrypt.BCrypt;
            System.out.println("No singleton hash generator, creating new one");
            generatorInstance = new HashGenerator();
        }
-       else{
-           System.out.println("Already have a hash generator");
-       }
+   
        
    
        return HashGenerator.generatorInstance;
