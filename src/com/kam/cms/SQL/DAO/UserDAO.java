@@ -7,10 +7,8 @@ package com.kam.cms.SQL.DAO;
 
 import com.kam.DBUtil.DBUtil;
 import com.kam.SQL.ConnectionFactory;
-
 import com.kam.cms.beans.UserBean;
-import com.kam.cms.saltnhash.HashGeneratorTester;
-
+import com.kam.cms.saltnhash.HashGenerator;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -47,25 +45,28 @@ public class UserDAO {
         return userList;
     }
 
-    public UserBean getSpecificUser(String user, String password) {
+    public UserBean getSpecificUser(String user, String password) { //cannot search by pass, we must retrieve pass and compare
         ResultSet rs = null;
         PreparedStatement ps = null;
         UserBean newBean = null;
         Connection con = getConnection();
        
         String getUserStatement = "SELECT * FROM users "
-                + "WHERE userName = ? "
-                + "AND userPass = ?";
+                + "WHERE userName = ?";
        
         try {
            
              ps = con.prepareStatement(getUserStatement);
             
             ps.setString(1, user);
-            ps.setString(2, password);
             rs = ps.executeQuery();
-            boolean userExists = rs.next();
-          
+            boolean userExists = rs.next();  //this tells us if we have any results
+           
+            if(userExists){
+                 String userHashedPass = rs.getString("userPass"); //get the hashedPass
+                 boolean userPassMatches = this.comparePassAndHash(password, userHashedPass); //compare the plain pass and see if it hashes into something similar to the DB
+                 userExists = userPassMatches;
+            }
             if (!userExists) {
                 System.out.println("User did not exist with username:"+ user+ "and pass:" + password);
                 return newBean;
@@ -76,7 +77,7 @@ public class UserDAO {
     String firstName = rs.getString("firstName");
     String lastName = rs.getString("lastName");
     String userEmail = rs.getString("userEmail");
-    String userPass = rs.getString("userPass");
+    String userPass = password; //if the hash matched, keep the plain text pass for future checks
     Integer userLevel = rs.getInt("userLevel");
     newBean = new UserBean(userId, userName, firstName, lastName, userEmail, userPass, userLevel);
      ps.close();
@@ -107,6 +108,7 @@ public class UserDAO {
    String lastName   = userToAdd.getLastName();
     String userEmail = userToAdd.getUserEmail();
    String userPass   = userToAdd.getUserPass();
+   String userHashedPass = this.getHashedPass(userPass); //we want to store the hashedPass
     Integer userLevel = userToAdd.getUserLevel();
      PreparedStatement stmt = null;
      Connection con = null;
@@ -122,7 +124,7 @@ public class UserDAO {
         stmt.setString(2, firstName);
         stmt.setString(3, lastName);
         stmt.setString(4, userEmail);
-        stmt.setString(5, userPass);
+        stmt.setString(5, userHashedPass); //store hashed pass only
         stmt.setInt(6, userLevel);
         
         stmt.executeUpdate();
@@ -144,20 +146,25 @@ public class UserDAO {
   
 
     
-        public boolean userInDatabase(String user, String password) {
+        public boolean userInDatabase(String user, String password) { //we have to work around looking for the user by password since the hash can change with JBCrypt
                 ResultSet rs = null;
         PreparedStatement ps = null;
         
         Connection con = getConnection();
-        String getUserStatement = "SELECT userName FROM users "
-                                + "WHERE userName = ? and userPass = ? ";
+        String getUserStatement = "SELECT userName, userPass FROM users "
+                                + "WHERE userName = ?";
 
         try {
              ps = con.prepareStatement(getUserStatement);
             ps.setString(1, user);
-            ps.setString(2, password);
+          
             rs = ps.executeQuery();
             boolean userExists = rs.next();
+            if(userExists){
+                String hashedPass = rs.getString("userPass");
+                boolean passwordMatch = comparePassAndHash(password, hashedPass);
+                userExists = passwordMatch;                                   //If the password matches the Hash, we have a true user match
+            }
             DBUtil.closeStatement(ps);
             return userExists;
 
@@ -210,7 +217,16 @@ public class UserDAO {
     }
     
     private String getHashedPass(String unHashedPass){
+        HashGenerator gen = HashGenerator.getInstance();
         
-      return null;
+        return gen.getHash(unHashedPass);
+        
+     
+    }
+    
+    private boolean comparePassAndHash(String unHashedPass, String hashedPass){
+        HashGenerator gen = HashGenerator.getInstance();
+        return gen.testPassMatch(unHashedPass, hashedPass);
+        
     }
 }
