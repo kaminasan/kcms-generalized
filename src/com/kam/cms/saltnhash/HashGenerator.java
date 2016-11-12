@@ -24,10 +24,15 @@ import org.mindrot.jbcrypt.BCrypt;
     }
    
    public boolean testPassMatch(String plainTextPass, String hashedPass){
-       boolean matched= BCrypt.checkpw(plainTextPass, hashedPass);
-       String result = (matched) ? "Password Matched": "No match";
-       System.out.println(result);
-       return matched;   
+       boolean matched = false;
+       try{
+           matched= BCrypt.checkpw(plainTextPass, hashedPass);
+       }
+       catch(Exception e){
+           System.out.println("Error in JBCrypt salt method");
+       }
+   
+       return matched;        
    }
    
    public static HashGenerator getInstance(){ 
