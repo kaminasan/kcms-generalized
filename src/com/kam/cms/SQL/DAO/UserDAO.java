@@ -9,6 +9,7 @@ import com.kam.DBUtil.DBUtil;
 import com.kam.SQL.ConnectionFactory;
 
 import com.kam.cms.beans.UserBean;
+import com.kam.cms.saltnhash.HashUtils;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -206,5 +207,9 @@ public class UserDAO {
         Connection con = ConnectionFactory.returnConnection("pooled");
         return con;
     }
-
+    
+    private String getHashedPass(String unHashedPass){
+        String hashedPass = HashUtils.getHashedPass(unHashedPass);
+        return hashedPass;
+    }
 }

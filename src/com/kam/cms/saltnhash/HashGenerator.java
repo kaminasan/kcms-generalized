@@ -23,10 +23,11 @@ import org.mindrot.jbcrypt.BCrypt;
        return hashedString; 
     }
    
-   public String testMatch(String hashedPass, String plainTextPass){
+   public boolean testPassMatch(String plainTextPass, String hashedPass){
        boolean matched= BCrypt.checkpw(plainTextPass, hashedPass);
        String result = (matched) ? "Password Matched": "No match";
-       return result;   
+       System.out.println(result);
+       return matched;   
    }
    
    public static HashGenerator getInstance(){ 
