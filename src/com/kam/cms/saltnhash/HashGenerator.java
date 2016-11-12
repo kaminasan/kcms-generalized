@@ -9,7 +9,7 @@ import org.mindrot.jbcrypt.BCrypt;
  *
  * @author KaminaSan <www.kaminasan.com>
  */
- class HashGenerator {
+ public class HashGenerator {
     
    private static HashGenerator generatorInstance = new HashGenerator();
    private static final int LOADLEVEL = 12;
